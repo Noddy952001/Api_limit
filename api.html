@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API_CALL</title>
+  </head>
+
+  <style>
+    #main_div{
+        margin-left: 40%;
+        margin-top: 10%;
+        border: 1px solid black;
+        width: 20%;
+        text-align: center;
+        padding: 20px;
+    }
+
+    #status{
+        color: red;
+        font-size: 20px;
+    }
+
+    #calls{
+        color: blue;
+        font-size: 20px;
+    }
+
+  </style>
+  <body>
+    <div id="main_div">
+        <h2>API STATUS</h2>
+        <div style="display: flex; justify-content: space-between; "  >
+            <p id="calls"></p>
+            <p id="status"></p>
+        </div>
+        <button onclick="ApiCall()">Press to call</button>
+    </div>
+  </body>
+</html>
+
+<script>
+  let x = 0;
+
+  let time = false;
+
+  function ApiCall() {
+    start_time = true;
+
+    if (!time) {
+      time = true;
+
+        setTimeout(() => {
+            time = false;
+            x = 0; 
+        }, 600000);
+    }
+
+    if (x < 5) {
+        fetch("https://refreshertest.herokuapp.com/listing").then((res) => {
+        document.getElementById("calls").innerHTML = "No of call : " + x;
+    });
+    x++;
+    } else {
+     document.getElementById("status").innerHTML = "Api limit blockd ! ";
+    }
+  }
+</script>
